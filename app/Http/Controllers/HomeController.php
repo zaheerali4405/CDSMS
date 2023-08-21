@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+
     }
 
     /**
@@ -26,12 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user_id = Auth::user()->id;
-        $user = Students::all()->where('user_id', $user_id)->first();
-        if ($user->status == 'active')
-            $active = 'yes';
-        else
-            $active = 'no';
-        return view('user/home', compact('active') );
+        return view('test');
     }
 }

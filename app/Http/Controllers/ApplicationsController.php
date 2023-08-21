@@ -12,7 +12,7 @@ class ApplicationsController extends Controller
      */
     public function index()
     {
-        //
+        return view('test');
     }
 
     /**

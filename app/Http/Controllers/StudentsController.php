@@ -13,7 +13,13 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        //
+        $user_id = Auth::user()->id;
+        $user = Students::all()->where('user_id', $user_id)->first();
+        if ($user->status == 'active')
+            $status = 'active';
+        else
+            $status = 'inactive';
+        return view('user/home', compact('status') );
     }
 
     /**
