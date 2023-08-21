@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Students;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user_id = Auth::user()->id;
+        $user = Students::all()->where('user_id', $user_id)->first();
+        if ($user->status == 'active')
+            $active = 'yes';
+        else
+            $active = 'no';
+        return view('user/home', compact('active') );
     }
 }
