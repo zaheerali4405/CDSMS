@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('applications', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('program_id');
-            $table->string('time_slot');
-            $table->string('status')->default('pending');
+            $table->string('name');
+            $table->string('duration');
+            $table->integer('fee');
+            $table->string('vehicle');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('applications');
+        Schema::dropIfExists('packages');
     }
 };

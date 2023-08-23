@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applications;
+use App\Models\Students;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ApplicationsController extends Controller
@@ -12,7 +14,8 @@ class ApplicationsController extends Controller
      */
     public function index()
     {
-        return view('test');
+        $applications = Applications::all();
+        return view('admin.applications.index', compact('applications'));
     }
 
     /**
@@ -20,7 +23,7 @@ class ApplicationsController extends Controller
      */
     public function create()
     {
-        return view('user.student_create');
+        return view('user.application_create');
     }
 
     /**
@@ -50,9 +53,18 @@ class ApplicationsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Applications $applications)
+    public function update(Request $request, Applications $applications, $id)
     {
-        //
+        $application = Applications::find($id);
+        $application->status = 'approved';
+        $application->save();
+
+        $user = User::where('id', $application->user_id)->first();
+        $student = Students::where('user_id', $user->id)->first();
+        $student->status = 'active';
+        $student->save();
+
+        return redirect()->route('applications.index');
     }
 
     /**

@@ -42,7 +42,9 @@ class EnquiriesController extends Controller
      */
     public function show(Enquiries $enquiries)
     {
-        //
+        $unread_enquiries = Enquiries::all()->where('status', 'unread');
+        $read_enquiries = Enquiries::all()->where('status', 'read');
+        return view('admin.enquiries.index', compact('unread_enquiries', 'read_enquiries'));
     }
 
     /**
@@ -56,9 +58,12 @@ class EnquiriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Enquiries $enquiries)
+    public function update(Request $request, Enquiries $enquiries, $id)
     {
-        //
+        $enquiry = Enquiries::find($id);
+        $enquiry->status = 'read';
+        $enquiry->save();
+        return redirect()->route('enquiries.all');
     }
 
     /**

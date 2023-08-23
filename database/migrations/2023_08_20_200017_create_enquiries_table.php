@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->string('subject');
             $table->string('description');
+            $table->string('status')->default('unread');
             $table->timestamps();
         });
     }

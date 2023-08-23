@@ -68,11 +68,14 @@
                     <h1 class="text-white font-weight-light mb-5 text-uppercase font-weight-bold">Car Driving
                         School</h1>
                     <p>
-                        @if($status == 'active')
-                            <a href="{{ route('student.dashboard') }}" class="btn btn-primary py-3 px-5 text-white">Go to Dashboard</a></p>
-                        @elseif($status == 'inactive')
-                            <a href="{{ route('student.create') }}" class="btn btn-primary py-3 px-5 text-white">Get Enrolled</a></p>
-                        @endif
+{{--                        @if($status == 'active')--}}
+{{--                            <a href="{{ route('student.dashboard') }}" class="btn btn-primary py-3 px-5 text-white">Go to Dashboard</a></p>--}}
+{{--                        @elseif($status == 'inactive')--}}
+{{--                            <a href="{{ route('student.create') }}" class="btn btn-primary py-3 px-5 text-white">Get Enrolled</a></p>--}}
+{{--                        @endif--}}
+
+                    <a href="{{ route('student.create') }}" class="btn btn-primary py-3 px-5 text-white">Get Enrolled</a></p>
+
                 </div>
             </div>
         </div>
