@@ -24,20 +24,7 @@
                 </div>
                 <div class="col-md-6 order-md-1 text-justify" data-aos="fade">
                     <h2 class="text-primary fw-bold mb-4">Our History</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis deleniti reprehenderit animi
-                        est eaque corporis! Nisi, asperiores nam amet doloribus, soluta ut reiciendis. Consequatur modi
-                        rem, vero eos ipsam voluptas.</p>
-                    <p class="mb-5">Error minus sint nobis dolor laborum architecto, quaerat. Voluptatum porro expedita
-                        labore esse velit veniam laborum quo obcaecati similique iusto delectus quasi!</p>
-                    <p>sectetur adipisicing elit. Blanditiis deleniti reprehenderit animi est eaque corporis! Nisi,
-                        asperiores nam amet doloribus, soluta ut reiciendis. Consequatur modi rem, vero eos ipsam
-                        voluptassectetur adipisicing elit. Blanditiis deleniti reprehenderit animi est eaque corporis!
-                        Nisi, asperiores nam amet doloribus, soluta ut reiciendis. Consequatur modi rem, vero eos ipsam
-                        voluptassectetur adipisicing elit. Blanditiis deleniti reprehenderit animi est eaque corporis!
-                        Nisi, asperiores nam amet doloribus, soluta ut reiciendis. Consequatur modi rem, vero eos ipsam
-                        voluptassectetur adipisicing elit. Blanditiis deleniti reprehenderit animi est eaque corporis!
-                        Nisi, asperiores nam amet doloribus, soluta ut reiciendis. Consequatur modi rem, vero eos ipsam
-                        voluptas</p>
+                    <p>{{ $info->history }}</p>
                 </div>
 
             </div>

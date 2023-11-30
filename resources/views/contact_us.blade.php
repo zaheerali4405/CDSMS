@@ -68,13 +68,13 @@
                 <div class="col-md-5">
                     <div class="p-4 mb-3 bg-white">
                         <p class="mb-0 font-weight-bold">Address</p>
-                        <p class="mb-4">Lahore, Pakistan</p>
+                        <p class="mb-4">{{ $info->address }}</p>
 
                         <p class="mb-0 font-weight-bold">Phone</p>
-                        <p class="mb-4"><a href="#">+92345678910</a></p>
+                        <p class="mb-4"><a href="#">{{ $info->contact }}</a></p>
 
                         <p class="mb-0 font-weight-bold">Email Address</p>
-                        <p class="mb-0"><a href="#">admin@cdsms.com</a></p>
+                        <p class="mb-0"><a href="#">{{ $info->email }}</a></p>
 
                     </div>
 

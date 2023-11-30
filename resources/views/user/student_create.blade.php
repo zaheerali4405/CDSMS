@@ -33,9 +33,21 @@
                         </div>
                     </div>
                     <div class="row mb-3">
+                        <label for="cnic" class="col-md-3 col-form-label text-md-end">CNIC:</label>
+                        <div class="col-md-7">
+                            <input id="cnic" type="text" class="form-control" name="cnic" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="Address" class="col-md-3 col-form-label text-md-end">Address:</label>
+                        <div class="col-md-7">
+                            <input id="address" type="text" class="form-control" name="address" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label for="Gender" class="col-md-3 col-form-label text-md-end">Gender:</label>
                         <div class="col-md-7">
-                            <select  id="gender" name="gender" class="form-group" required>
+                            <select  id="gender" name="gender" class="form-group w-100 h-100" required>
                                 <option value="">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -46,7 +58,7 @@
                     <div class="row mb-3">
                         <label for="Time-Slot" class="col-md-3 col-form-label text-md-end">Time Slot:</label>
                         <div class="col-md-7">
-                            <select  id="time_slot" name="time_slot" class="form-group" required>
+                            <select  id="time_slot" name="time_slot" class="form-group w-100 h-100" required>
                                 <option value="">Select Time Slot</option>
                                 <option value="Morning">Morning</option>
                                 <option value="Evening">Evening</option>
@@ -56,7 +68,7 @@
                     <div class="row mb-3">
                         <label for="program" class="col-md-3 col-form-label text-md-end">Program:</label>
                         <div class="col-md-7">
-                            <select  id="program_id" name="program_id" class="form-group" required>
+                            <select  id="program_id" name="program_id" class="form-group w-100 h-100" required>
                                 <option class="form-control" value="">Select Program</option>
                                 @foreach($packages as $package)
                                 <option class="form-control" value="{{ $package->id }}">{{ $package->name }}</option>
@@ -65,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                     </div>
                 </form>

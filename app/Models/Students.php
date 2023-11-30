@@ -9,4 +9,9 @@ class Students extends Model
 {
     use HasFactory;
 
+    public function getProgramName()
+    {
+        return $this->belongsTo(Packages::class, 'program_id', 'id');
+    }
+
 }

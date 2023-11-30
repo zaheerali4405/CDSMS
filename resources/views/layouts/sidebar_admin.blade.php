@@ -5,9 +5,9 @@
                 <ul class="collapsible" data-collapsible="accordion">
                     <li><a href="{{ route('admin.home') }}" class="menu-active"><i class="bi bi-bar-chart" aria-hidden="true"></i> Dashboard</a></li>
 
-                    <li><a href="{{ route('admin.packages.index') }}"><i class="bi bi-list-check" aria-hidden="true"></i>Packages</a></li>
-
                     <li ><a href="{{ route('students.index') }}"><i class="bi bi-people" aria-hidden="true"></i>Students</a></li>
+
+                    <li><a href="{{ route('admin.packages.index') }}"><i class="bi bi-list-check" aria-hidden="true"></i>Packages</a></li>
 
                     <li><a href="{{ route('applications.index') }}"><i class="bi bi-window-stack" aria-hidden="true"></i>Applications</a></li>
 

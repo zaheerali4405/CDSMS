@@ -13,7 +13,9 @@ class EnquiriesController extends Controller
      */
     public function index()
     {
-        return view('user.enquiries');
+        $user_id = auth::user()->id;
+        $enquiries = Enquiries::where('user_id' , $user_id)->get();
+        return view('user.enquiries', compact('enquiries'));
     }
 
     /**
@@ -42,9 +44,8 @@ class EnquiriesController extends Controller
      */
     public function show(Enquiries $enquiries)
     {
-        $unread_enquiries = Enquiries::all()->where('status', 'unread');
-        $read_enquiries = Enquiries::all()->where('status', 'read');
-        return view('admin.enquiries.index', compact('unread_enquiries', 'read_enquiries'));
+        $enquiries = Enquiries::all();
+        return view('admin.enquiries.index', compact('enquiries'));
     }
 
     /**
@@ -58,7 +59,7 @@ class EnquiriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Enquiries $enquiries, $id)
+    public function update(Request $request, $id)
     {
         $enquiry = Enquiries::find($id);
         $enquiry->status = 'read';
@@ -69,8 +70,5 @@ class EnquiriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Enquiries $enquiries)
-    {
-        //
-    }
+
 }

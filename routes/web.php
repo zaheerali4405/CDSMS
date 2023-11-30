@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Packages;
+use App\Models\PagesInfo;
+use App\Models\Students;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +21,18 @@ Auth::routes();
 
 //General Routes
 Route::get('/', function () {
-    return view('index');
+    $packages = Packages::all();
+    return view('index', compact('packages'));
 });
+
 Route::get('/AboutUs', function () {
-    return view('about_us');
+    $info = PagesInfo::first();
+    return view('about_us', compact('info'));
 })->name('about');
+
 Route::get('/ContactUs', function () {
-    return view('contact_us');
+    $info = PagesInfo::first();
+    return view('contact_us' , compact('info'));
 }) ->name('contact');
 
 //Student Module Routes
@@ -32,7 +40,8 @@ Route::prefix('student/')->name('student.')->middleware(['auth' , 'user-role:stu
     Route::get('home', 'index')->name('home');
     Route::get('create', 'create')->name('create');
     Route::post('store', 'store')->name('store');
-    Route::get('dashboard', 'dashboard')->name('dashboard');
+    Route::get('update_profile', 'updateProfile')->name('update-profile');
+    Route::post('update_profile', 'updateProfileSave')->name('update-profile');
     Route::get('application_status', 'application_status')->name('application_status');
 });
 
@@ -67,6 +76,7 @@ Route::prefix('admin/packages/')->name('admin.packages.')->middleware(['auth' , 
 
 Route::prefix('students/')->name('students.')->middleware(['auth' , 'user-role:admin'])->controller(\App\Http\Controllers\StudentsController::class)->group(function () {
     Route::get('index', 'show')->name('index');
+    Route::get('search', 'search')->name('search');
     Route::get('edit/{id}', 'edit')->name('edit');
     Route::post('update/{id}', 'update')->name('update');
     Route::get('delete/{id}', 'destroy')->name('delete');
@@ -76,7 +86,6 @@ Route::prefix('enquiries/')->name('enquiries.')->middleware(['auth' , 'user-role
     Route::get('all', 'show')->name('all');
     Route::get('edit/{id}', 'edit')->name('edit');
     Route::get('update/{id}', 'update')->name('update');
-    Route::get('delete/{id}', 'destroy')->name('delete');
 });
 
 Route::prefix('manage/')->name('manage.')->middleware(['auth' , 'user-role:admin'])->controller(\App\Http\Controllers\PagesInfoController::class)->group(function () {

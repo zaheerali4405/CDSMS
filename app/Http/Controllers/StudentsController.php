@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Applications;
 use App\Models\Packages;
 use App\Models\Students;
+use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +17,8 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        return view('user/home');
+        $packages = Packages::all();
+        return view('user/home', compact('packages'));
     }
 
     /**
@@ -30,6 +33,32 @@ class StudentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    //  Function for making a registration number
+    public function RegistrationNo() {
+        $createType = 'ST';
+        $last = Students::query()->select('registration_number')->orderBy('id', 'DESC')->first();
+
+        if($last) {
+            $l = substr($last->registration_number, 4, 3);
+            $n = substr($last->registration_number, -4);
+
+            if ($n == 9999) {
+                $n = 1;
+                $l++;
+            } else {
+                $n++;
+            }
+        } else {
+            $l = "AAA";
+            $n = 1;
+        }
+        return $createType.date('y').$l.sprintf("%04d",$n);
+
+        //return a registration number in format: ST23AAA0001
+
+    }
+
     public function store(Request $request)
     {
         $student = Students::where('user_id', Auth::user()->id)->first();
@@ -42,9 +71,12 @@ class StudentsController extends Controller
         {
         $student = new Students();
         $student->user_id = Auth::user()->id;
+        $student->registration_number = $this->RegistrationNo();
         $student->name = $request->name;
         $student->phone = $request->phone;
         $student->age = $request->age;
+        $student->cnic = $request->cnic;
+        $student->address = $request->address;
         $student->gender = $request->gender;
         $student->time_slot = $request->time_slot;
         $student->program_id = $request->program_id;
@@ -60,6 +92,25 @@ class StudentsController extends Controller
         }
     }
 
+
+    public function updateProfile()
+    {
+        $user = User::find(Auth::user()->id);
+        return view('user.update_profile', compact('user'));
+    }
+
+    public function updateProfileSave(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password){
+        $user->password = Hash::make($request->password);
+        }
+        $user->save();
+        return redirect(route('student.home'));
+    }
+
     /**
      * Display the specified resource.
      */
@@ -69,27 +120,17 @@ class StudentsController extends Controller
         return view('admin.students.index', compact('students'));
     }
 
-    public function dashboard(Students $students)
-    {
-        return view('user.dashboard');
-    }
-
     public function application_status(Students $students)
     {
         $user_id = Auth::user()->id;
-        $user = Students::all()->where('user_id', $user_id)->first();
-        if($user)
-            {
-                if ($user->status == 'active')
-                    $status = '1';
-                else
-                    $status = '0';
-            }
-        else
-            {
-                $status = '2';
-            }
-        return view('user.application_status', compact('status') );
+        $application = Applications::all()->where('user_id' , $user_id)->first();
+        if ($application){
+            $status = '1';
+        }
+        else{
+            $status = '0';
+        }
+        return view('user.application_status', compact('application' , 'status') );
     }
 
     /**
@@ -115,6 +156,14 @@ class StudentsController extends Controller
         $student->program_id = $request->program_id;
         $student->save();
         return redirect()->route('students.index');
+    }
+
+
+    public function search(Students $students, Request $request)
+    {
+        $reg = $request->reg;
+        $students = Students::where('registration_number', 'LIKE', "%$reg%")->get();
+        return view('admin.students.search', compact('students'));
     }
 
     /**

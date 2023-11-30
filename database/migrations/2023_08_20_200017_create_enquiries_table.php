@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('subject');
             $table->string('description');
             $table->string('status')->default('unread');
+            $table->string('answer')->default('Null');
             $table->timestamps();
         });
     }
